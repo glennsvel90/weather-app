@@ -59,14 +59,30 @@ citySelected.current(0)
 
 max_width = max((len(x) for x in citySelected['values']))
 
-Entry_WIDTH = max_width + 3
+ENTRY_WIDTH = max_width + 3
 
 new_width = max_width - 4
 citySelected.config(width=new_width)
 
-ttk.Label(weather_conditions_frame, text="Last Updated:").grid(column=0, row=1, sticky='W')
+ttk.Label(weather_conditions_frame, text="Last Updated:").grid(column=0, row=1, sticky='E')
 updated = tk.StringVar()
-updatedEntry = ttk.Entry(weather_conditions_frame, width=Entry_WIDTH, textvariable=updated, state='readonly')
+updatedEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=updated, state='readonly')
+updatedEntry.grid(column=1, row=1, sticky='W')
+
+ttk.Label(weather_conditions_frame, text="Weather:").grid(column=0, row=2, sticky='E')
+weather = tk.StringVar()
+weatherEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=weather, state='readonly')
+weatherEntry.grid(column=1, row=2, sticky='W')
+
+ttk.Label(weather_conditions_frame, text="Temperature").grid(column=0, row=3, sticky='E')
+temperature = tk.StringVar()
+temperatureEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=temperature, state='readonly')
+temperatureEntry.grid(column=1, row=3, sticky='W')
+
+for child in weather_conditions_frame.winfo_children():
+    # child.grid_configure(padx=6, pady=6)
+    # child.grid_configure(padx=6, pady=3)
+    child.grid_configure(padx=4, pady=2)
 
 
 
