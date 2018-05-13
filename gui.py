@@ -57,6 +57,17 @@ citySelected.grid(column=1, row=0)
 citySelected.current(0)
 
 
+max_width = max((len(x) for x in citySelected['values']))
+
+Entry_WIDTH = max_width + 3
+
+new_width = max_width - 4
+citySelected.config(width=new_width)
+
+ttk.Label(weather_conditions_frame, text="Last Updated:").grid(column=0, row=1, sticky='W')
+updated = tk.StringVar()
+updatedEntry = ttk.Entry(weather_conditions_frame, width=Entry_WIDTH, textvariable=updated, state='readonly')
+
 
 
 
