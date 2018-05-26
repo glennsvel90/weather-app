@@ -3,12 +3,21 @@ from tkinter import Menu
 from tkinter import ttk
 
 import urllib.request
+import xml.etree.ElementTree as ET
 
 
 # Functions
 
 def get_weather_data(station_id='KLAX'):
-    url
+    url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
+    url = url_general.format(station_id)
+    print(url)
+    request = urllib.request.urlopen(url)
+    content = request.read().decode()
+    # use ElementTree to get certain tags from the xml
+
+
+
 # Exit GUI cleanly
 def _quit():
     win.quit()
@@ -106,7 +115,8 @@ weather_data_tags_dict = {
     'temp_f': '',
 }
 
-
+xml_root = ET.fromstring(content)
+print('xml_root: {}\n')
 
 
 
