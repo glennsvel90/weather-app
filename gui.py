@@ -2,8 +2,13 @@ import tkinter as tk
 from tkinter import Menu
 from tkinter import ttk
 
+import urllib.request
+
 
 # Functions
+
+def get_weather_data(station_id='KLAX'):
+    url
 # Exit GUI cleanly
 def _quit():
     win.quit()
@@ -48,8 +53,7 @@ tabControl.pack(expand=1, fill="both")
 weather_conditions_frame = ttk.LabelFrame(tab1, text="Current Weather Conditions")
 weather_conditions_frame.grid(column=0, row=1, padx=8, pady=4)
 
-weather_cities_frame = ttk.LabelFrame(tab1,text=' Latest Observation for ')
-weather_cities_frame.grid(column)
+
 
 ttk.Label(weather_conditions_frame, text="Locations").grid(column=0, row=0, sticky="W")
 
@@ -59,7 +63,7 @@ citySelected["values"]=("Los Angeles", "London", "Rio de Janeiro, Brazil")
 citySelected.grid(column=1, row=0)
 citySelected.current(0)
 
--
+
 
 
 max_width = max((len(x) for x in citySelected['values']))
@@ -89,6 +93,18 @@ for child in weather_conditions_frame.winfo_children():
     # child.grid_configure(padx=6, pady=3)
     child.grid_configure(padx=4, pady=2)
 
+weather_cities_frame = ttk.LabelFrame(tab1,text=' Latest Observation for ')
+weather_cities_frame.grid(column=0, row=0,padx=8, pady=4)
+
+##############################################################################################
+# NOAA DATA directly from live web search
+
+#Retrieve the tags we are interested in
+weather_data_tags_dict = {
+    'observation': '',
+    'weather': '',
+    'temp_f': '',
+}
 
 
 
