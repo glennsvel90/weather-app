@@ -14,8 +14,23 @@ def get_weather_data(station_id='KLAX'):
     print(url)
     request = urllib.request.urlopen(url)
     content = request.read().decode()
+    print(content)
+
+    xml_root = ET.fromstring(content)
+    print('xml_root: {}\n'.format(xml_root.tag))
+
+    for datapoint in weather_data_tags_dict.keys():
+        weather_data_tags_dict[datapoint] = xml_root.find(datapoint).text
     # use ElementTree to get certain tags from the xml
 
+def populate_gui_from_dict():
+    location.set(weather_data_tags_dict['location'])
+    updated.set(weather_data_tags_dict['observation_time'].replace('Last Updated on ', ''))
+    weather.set(weather_data_tags_dict['weather'])
+
+
+def _get_station():
+    station = station_id_combo.get
 
 
 # Exit GUI cleanly
@@ -110,13 +125,11 @@ weather_cities_frame.grid(column=0, row=0,padx=8, pady=4)
 
 #Retrieve the tags we are interested in
 weather_data_tags_dict = {
-    'observation': '',
+    'observation_time': '',
     'weather': '',
     'temp_f': '',
 }
 
-xml_root = ET.fromstring(content)
-print('xml_root: {}\n')
 
 
 
