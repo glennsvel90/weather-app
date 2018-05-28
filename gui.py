@@ -27,10 +27,15 @@ def populate_gui_from_dict():
     location.set(weather_data_tags_dict['location'])
     updated.set(weather_data_tags_dict['observation_time'].replace('Last Updated on ', ''))
     weather.set(weather_data_tags_dict['weather'])
+    temp.set('{} \xb0F  ({} \xb0C)'.format(weather_data_tags_dict['temp_f'], weather_data_tags_dict['temp_c']))
 
 
 def _get_station():
-    station = station_id_combo.get
+    station = station_id_combo.get()
+    get_weather_data(station)
+    populate_gui_from_dict()
+
+
 
 
 # Exit GUI cleanly
@@ -120,6 +125,29 @@ for child in weather_conditions_frame.winfo_children():
 weather_cities_frame = ttk.LabelFrame(tab1,text=' Latest Observation for ')
 weather_cities_frame.grid(column=0, row=0,padx=8, pady=4)
 
+
+
+
+ttk.Label(weather_cities_frame, text="Weather Station ID: ").grid(column=0, row=0)
+
+
+
+station_id = tk.StringVar()
+station_id_combo = ttk.Combobox(weather_cities_frame, width=6, textvariable=station_id)
+
+station_id_combo['values'] = ('KLAX', 'KDEN', 'KNYC')
+station_id_combo.grid(column=1, row=0)
+station_id_combo.current(0)
+
+
+get_weather_btn = ttk.Button(weather_cities_frame, text='Get Weather', command=_get_station).grid(column=2, row=0)
+
+location = tk.StringVar()
+# ttk.Label(weather_cities_frame, textvariable=location).grid(column=0, row=1, columnspan=3)
+
+for child in weather_cities_frame.winfo_children():
+    child.grid_configure(padx=5, pady=4)
+
 ##############################################################################################
 # NOAA DATA directly from live web search
 
@@ -128,6 +156,8 @@ weather_data_tags_dict = {
     'observation_time': '',
     'weather': '',
     'temp_f': '',
+    'temp_c': '',
+    'location': '',
 }
 
 
