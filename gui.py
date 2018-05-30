@@ -45,7 +45,17 @@ def get_city_station_ids(state='ca'):
     url_general = 'http://w1.weather.gov/xml/current_obs/seek.php?state={}&Find=Find'
     state = state.lower()
     url = url_general.format(state)
-    request = 
+    request = urllib.request.urlopen(url)
+    content = request.read().decode()
+
+    parser = WeatherHTMLParser()
+    parser.feed(content)
+
+    print(len(parser.stations) == len(parser.cities))
+
+    scr.delete('1.0', tk.END) # Clear scrolledText widget for next button click
+
+    for idx in range
 
 
 
