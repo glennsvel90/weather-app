@@ -19,6 +19,7 @@ def get_weather_data(station_id='KLAX'):
     xml_root = ET.fromstring(content)
     print('xml_root: {}\n'.format(xml_root.tag))
 
+
     for datapoint in weather_data_tags_dict.keys():
         weather_data_tags_dict[datapoint] = xml_root.find(datapoint).text
     # use ElementTree to get certain tags from the xml
@@ -34,6 +35,10 @@ def _get_station():
     station = station_id_combo.get()
     get_weather_data(station)
     populate_gui_from_dict()
+
+def _get_cities():
+    state = state_combo.get()
+    get_city_station_ids(state)
 
 
 
