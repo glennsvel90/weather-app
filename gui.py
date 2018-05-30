@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import Menu
 from tkinter import ttk
+from tkinter import scrolledtext
 
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -39,6 +40,12 @@ def _get_station():
 def _get_cities():
     state = state_combo.get()
     get_city_station_ids(state)
+
+def get_city_station_ids(state='ca'):
+    url_general = 'http://w1.weather.gov/xml/current_obs/seek.php?state={}&Find=Find'
+    state = state.lower()
+    url = url_general.format(state)
+    request = 
 
 
 
@@ -127,7 +134,7 @@ station_id_combo.grid(column=1, row=0)
 station_id_combo.current(0)
 
 
-get_weather_btn = ttk.Button(weather_cities_frame, text='Get Weather', command=_get_station).grid(column=2, row=0)
+
 
 location = tk.StringVar()
 ttk.Label(weather_cities_frame, textvariable=location).grid(column=0, row=1, columnspan=3)
@@ -167,6 +174,20 @@ state_combo['values'] = ('AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI',
 
 state_combo.grid(column=1, row=0)
 state_combo.current(0)
+
+get_weather_btn = ttk.Button(weather_states_frame, text='Get Cities', command=_get_cities).grid(column=2, row=0)
+
+scr = scrolledtext.ScrolledText(weather_states_frame, width=30, height=17, wrap=tk.WORD)
+scr.grid(column=0, row=1, columnspan=3)
+
+
+for child in weather_states_frame.winfo_children():
+    child.grid_configure(padx=6, pady=6)
+
+
+
+
+
 
 
 
