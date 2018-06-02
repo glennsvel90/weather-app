@@ -5,10 +5,11 @@ from tkinter import scrolledtext
 
 import urllib.request
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 
-
+#####################################################################
 # Functions from all gui notebook tabs
-
+#####################################################################
 def get_weather_data(station_id='KLAX'):
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
@@ -55,8 +56,11 @@ def get_city_station_ids(state='ca'):
 
     scr.delete('1.0', tk.END) # Clear scrolledText widget for next button click
 
-    for idx in range
-
+    # match the first item in them cities list to the first item in the stations list...and so on
+    for idx in range(len(parser.stations)):
+        city_station = parser.cities[idx] + ' (' + parser.stations[idx] + ')'  # insert parenthesis in between cities and stationid
+        print(city_station)
+        scr.insert(tk.INSERT, city_station + '\n')
 
 
 
@@ -66,8 +70,21 @@ def _quit():
     win.destroy()
     exit()
 
+###########################################################################################
+# Classes from all gui notebook tabs
+###########################################################################################
 
-# Procedural Code
+
+
+
+
+
+
+
+
+################################################################################################
+# Procedural Code by organized by notebook tabs
+###############################################################################################
 # Create instance
 win = tk.Tk()
 
@@ -153,6 +170,9 @@ for child in weather_cities_frame.winfo_children():
     child.grid_configure(padx=5, pady=4)
 
 
+get_weather_btn = ttk.Button(weather_cities_frame, text='Get Weather', command=_get_station).grid(column=2, row=0)
+
+
 # NOAA DATA directly from live web search
 
 #Retrieve the tags we are interested in
@@ -187,7 +207,7 @@ state_combo.current(0)
 
 get_weather_btn = ttk.Button(weather_states_frame, text='Get Cities', command=_get_cities).grid(column=2, row=0)
 
-scr = scrolledtext.ScrolledText(weather_states_frame, width=30, height=17, wrap=tk.WORD)
+scr = scrolledtext.ScrolledText(weather_states_frame, width=50, height=17, wrap=tk.WORD)
 scr.grid(column=0, row=1, columnspan=3)
 
 
