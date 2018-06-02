@@ -49,6 +49,8 @@ def get_city_station_ids(state='ca'):
     request = urllib.request.urlopen(url)
     content = request.read().decode()
 
+    print(content)
+
     parser = WeatherHTMLParser()
     parser.feed(content)
 
@@ -75,7 +77,9 @@ def _quit():
 ###########################################################################################
 
 
-testing123
+class WeatherHTMLParser(HTMLParser):
+    def __init__(self):
+        super().__init
 
 
 
