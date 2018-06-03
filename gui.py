@@ -2,14 +2,19 @@ import tkinter as tk
 from tkinter import Menu
 from tkinter import ttk
 from tkinter import scrolledtext
-
+from weather-app.API_key import OWM_API_KEY
 import urllib.request
+import urllib.request import urlopen
+import json
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 
 #####################################################################
 # Functions from all gui notebook tabs
 #####################################################################
+
+def get_open_weather_data(city='London,uk'):
+
 def get_weather_data(station_id='KLAX'):
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
@@ -133,6 +138,9 @@ tabControl.add(tab1, text="NOAA")
 tab2 = ttk.Frame(tabControl)
 tabControl.add(tab2, text="Tab 2")
 
+tab2 = ttk.Frame(tabControl)
+tabControl.add(tab2, text="Tab 2")
+
 tabControl.pack(expand=1, fill="both")
 
 # TAB 1 #############################################################################
@@ -230,6 +238,77 @@ scr.grid(column=0, row=1, columnspan=3)
 
 for child in weather_states_frame.winfo_children():
     child.grid_configure(padx=6, pady=6)
+
+
+# TAB 3 ##########################################################################
+
+
+weather_conditions_frame = ttk.LabelFrame(tab1, text="Current Weather Conditions")
+weather_conditions_frame.grid(column=0, row=1, padx=8, pady=4)
+
+
+
+ENTRY_WIDTH = 25
+
+ttk.Label(weather_conditions_frame, text="Last Updated:").grid(column=0, row=1, sticky='E')
+updated = tk.StringVar()
+updatedEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=updated, state='readonly')
+updatedEntry.grid(column=1, row=1, sticky='W')
+
+ttk.Label(weather_conditions_frame, text="Weather:").grid(column=0, row=2, sticky='E')
+weather = tk.StringVar()
+weatherEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=weather, state='readonly')
+weatherEntry.grid(column=1, row=2, sticky='W')
+
+ttk.Label(weather_conditions_frame, text="Temperature").grid(column=0, row=3, sticky='E')
+temp = tk.StringVar()
+tempEntry = ttk.Entry(weather_conditions_frame, width=ENTRY_WIDTH, textvariable=temp, state='readonly')
+tempEntry.grid(column=1, row=3, sticky='W')
+
+for child in weather_conditions_frame.winfo_children():
+    # child.grid_configure(padx=6, pady=6)
+    # child.grid_configure(padx=6, pady=3)
+    child.grid_configure(padx=4, pady=2)
+
+weather_cities_frame = ttk.LabelFrame(tab1,text=' Latest Observation for ')
+weather_cities_frame.grid(column=0, row=0,padx=8, pady=4)
+
+
+ttk.Label(weather_cities_frame, text="Weather Station ID: ").grid(column=0, row=0)
+
+station_id = tk.StringVar()
+station_id_combo = ttk.Combobox(weather_cities_frame, width=6, textvariable=station_id)
+
+station_id_combo['values'] = ('KLAX', 'KDEN', 'KNYC')
+station_id_combo.grid(column=1, row=0)
+station_id_combo.current(0)
+
+
+
+
+location = tk.StringVar()
+ttk.Label(weather_cities_frame, textvariable=location).grid(column=0, row=1, columnspan=3)
+
+for child in weather_cities_frame.winfo_children():
+    child.grid_configure(padx=5, pady=4)
+
+
+get_weather_btn = ttk.Button(weather_cities_frame, text='Get Weather', command=_get_station).grid(column=2, row=0)
+
+
+# NOAA DATA directly from live web search
+
+#Retrieve the tags we are interested in
+weather_data_tags_dict = {
+    'observation_time': '',
+    'weather': '',
+    'temp_f': '',
+    'temp_c': '',
+    'location': '',
+}
+
+
+
 
 
 
