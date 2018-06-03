@@ -76,11 +76,24 @@ def _quit():
 # Classes from all gui notebook tabs
 ###########################################################################################
 
-
 class WeatherHTMLParser(HTMLParser):
     def __init__(self):
-        super().__init
+        super().__init__()
+        self.stations = []
+        self.cities = []
+        self.grab_data = False
 
+    def handle_starttag(self, tag, attrs):
+        for attr in attrs:
+            if "display.php?stid=" in str(attr):
+                cleaned_attr= str(attr).replace("('href', 'display.php?stid=", '').replace("')", '')
+                self.stations.append(cleaned_attr)
+                self.grab_data = True
+
+    def handle_data(self, data):
+        if self.grab_data:
+            self.cities.append(data)
+            self.grab_data = False
 
 
 
