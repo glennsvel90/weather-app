@@ -14,6 +14,11 @@ from html.parser import HTMLParser
 #####################################################################
 
 def get_open_weather_data(city='London,uk'):
+    city = city.replace(' ', '%20')
+    url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city, OWM_API_KEY)
+    response = urlopen(url)
+    data = response.read().decode()
+    
 
 def get_weather_data(station_id='KLAX'):
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
@@ -132,20 +137,21 @@ helpMenu.add_cascade(label="Help", menu=helpMenu)
 # Add Tab Control
 tabControl = ttk.Notebook(win)
 
+tab2 = ttk.Frame(tabControl)
+tabControl.add(tab2, text="NOAA")
+
+tab3 = ttk.Frame(tabControl)
+tabControl.add(tab3, text="Station ID Finder")
+
 tab1 = ttk.Frame(tabControl)
-tabControl.add(tab1, text="NOAA")
+tabControl.add(tab1, text="Open Weather Map")
 
-tab2 = ttk.Frame(tabControl)
-tabControl.add(tab2, text="Tab 2")
-
-tab2 = ttk.Frame(tabControl)
-tabControl.add(tab2, text="Tab 2")
 
 tabControl.pack(expand=1, fill="both")
 
-# TAB 1 #############################################################################
+# TAB 2 #############################################################################
 
-weather_conditions_frame = ttk.LabelFrame(tab1, text="Current Weather Conditions")
+weather_conditions_frame = ttk.LabelFrame(tab2, text="Current Weather Conditions")
 weather_conditions_frame.grid(column=0, row=1, padx=8, pady=4)
 
 
@@ -209,11 +215,11 @@ weather_data_tags_dict = {
     'location': '',
 }
 
-# TAB 2 ##########################################################################
+# TAB 3 ##########################################################################
 
 
 # Create a container to hold all other widgets
-weather_states_frame = ttk.Label(tab2, text= 'Weather Station IDs')
+weather_states_frame = ttk.Label(tab3, text= 'Weather Station IDs')
 weather_states_frame.grid(column=0, row=0, padx=8, pady=4)
 
 ttk.Label(weather_states_frame, text="Select a State: ").grid(column=0, row=0)
@@ -240,7 +246,7 @@ for child in weather_states_frame.winfo_children():
     child.grid_configure(padx=6, pady=6)
 
 
-# TAB 3 ##########################################################################
+# TAB 1 ##########################################################################
 
 
 weather_conditions_frame = ttk.LabelFrame(tab1, text="Current Weather Conditions")
