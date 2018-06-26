@@ -9,6 +9,7 @@ import json
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pprint import pprint
+from datetime import datetime
 
 #####################################################################
 # Functions from all gui notebook tabs
@@ -29,7 +30,30 @@ def get_open_weather_data(city='London,uk'):
     city_name = json_data['name']
     city_country = json_data['sys']['country']
     owm_weather = json_data['weather'][0]['description']
-    weather
+    weather_icon = json_data['weather'][0]['icon']
+
+    def kelvin_to_fahrenheit(temp_k):
+        return "{:.f}".format((temp_k - 273.15) * 1.8000 + 32.00)
+
+    def unix_to_datetime(unix_time):
+        return datetime.fromtimestamp(int(unix_time)).strftime('%Y-%m-%d %H:%M:%S')
+
+    open_location.set('{}, {}'.format(city_name, city_country))
+
+    lastupdate = unix_to_datetime(lastupdate_unix)
+    open_updated.set(lastupdate)
+    open_weather.set(owm_weather)
+    temp_fahr = kelvin_to_fahrenheit(temp_kelvin)
+    open_temp.set('{} \xb0F  ({} \xb0C)'.format(temp_fahr))
+
+    print(weather_icon)
+    url_icon = "http://openweathermap.org/img/w/{}.format(weather_icon)"
+    ico = urlopen(url_icon)
+    open_im = PIL.Image.open(ico)
+    open_photo = PIL.ImageTk.PhotoImage(open_im)
+    ttk.Label(open_weather_cities_frame, image=open_photo).grid(column=0, row=1)
+    win.update()
+
 
 
 def get_weather_data(station_id='KLAX'):
@@ -324,7 +348,6 @@ weather_data_tags_dict = {
     'temp_c': '',
     'location': '',
 }
-
 
 
 
