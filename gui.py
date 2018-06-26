@@ -10,6 +10,8 @@ import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pprint import pprint
 from datetime import datetime
+import PIL.Image
+import PIL.ImageTk
 
 #####################################################################
 # Functions from all gui notebook tabs
