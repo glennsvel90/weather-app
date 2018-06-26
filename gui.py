@@ -8,6 +8,7 @@ import urllib.request import urlopen
 import json
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
+from pprint import pprint
 
 #####################################################################
 # Functions from all gui notebook tabs
@@ -18,7 +19,18 @@ def get_open_weather_data(city='London,uk'):
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city, OWM_API_KEY)
     response = urlopen(url)
     data = response.read().decode()
-    
+    json_data = json.loads(data)
+    pprint(json_data)
+
+    lat_long = json_data['coord']
+    lastupdate_unix = json_data['dt']
+    city_id = json_data['id']
+    temp_kelvin = json_data['main']
+    city_name = json_data['name']
+    city_country = json_data['sys']['country']
+    owm_weather = json_data['weather'][0]['description']
+    weather
+
 
 def get_weather_data(station_id='KLAX'):
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
