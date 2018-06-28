@@ -7,8 +7,9 @@ Clone the repository. Unzip the folder. In the terminal, change to the directory
 
 ### Prerequisites
 
-Python 3
-Your own api key
+-Python 3
+
+-Your own api key
 
 ### Running the program
 
