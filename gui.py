@@ -19,6 +19,7 @@ import PIL.ImageTk
 
 # OpenWeatherMap Data collection
 def get_open_weather_data(city='London,uk'):
+      
     city = city.replace(' ', '%20')
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city, OWM_API_KEY_)
     response = urlopen(url)
@@ -101,6 +102,7 @@ def _get_station_open():
 
 
 def get_weather_data(station_id='KLAX'):
+     """ Retrieve live data from the website and insert the """ 
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
 #     print(url)
@@ -120,6 +122,8 @@ def get_weather_data(station_id='KLAX'):
 #         print(key, value)
 
 def populate_gui_from_dict():
+    """ Add weather dictionary values to the gui """
+    
     location.set(weather_data_tags_dict['location'])
     updated.set(weather_data_tags_dict['observation_time'].replace('Last Updated on ', ''))
     weather.set(weather_data_tags_dict['weather'])
