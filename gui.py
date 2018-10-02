@@ -107,7 +107,7 @@ def _get_station_open():
 
 
 def get_weather_data(station_id='KLAX'):
-     """ Retrieve live data from the website and insert the website""" 
+     """ Retrieve live data from the website and insert the website into a dictionary using weather station id""" 
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
 #     print(url)
@@ -143,6 +143,7 @@ def populate_gui_from_dict():
 
 # callback function
 def _get_cities():
+  """ Get the state and passes that into the get_city_station_ids function """
     state = state_combo.get()
     get_city_station_ids(state)
 
