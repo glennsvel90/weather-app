@@ -47,17 +47,20 @@ def get_open_weather_data(city='London,uk'):
     wind_speed_meter_sec = json_data['wind']['speed']
 
     def kelvin_to_celsius(temp_k):
+      """ Convert Kelvin temperature to Celsius """
         return "{:.1f}".format(temp_k - 273.15)
 
     def kelvin_to_fahrenheit(temp_k):
+      """ Convert Kelvin temperature to Fahrenheit """
         return "{:.1f}".format((temp_k - 273.15)* 1.8000 + 32.00)
 
-    from datetime import datetime
     def unix_to_datetime(unix_time):
+      """ Convert unix date to string timestamp """
         return datetime.fromtimestamp(int(unix_time)
         ).strftime('%Y-%m-%d %H:%M:%S')
 
     def meter_to_miles(meter):
+      """ Convert meters to miles """
         return "{:.2f}".format((meter * 0.00062137))
 
     if visibility_meter is 'N/A':
@@ -66,6 +69,8 @@ def get_open_weather_data(city='London,uk'):
         visibility_miles = meter_to_miles(visibility_meter)
 
     def mps_to_mph(meter_second):
+      """ Convert meters per second to miles per hour """
+
         return "{:.1f}".format((meter_second * (2.23693629)))
 
     # Update GUI entry widgets with live data
@@ -102,11 +107,12 @@ def _get_station_open():
 
 
 def get_weather_data(station_id='KLAX'):
-     """ Retrieve live data from the website and insert the """ 
+     """ Retrieve live data from the website and insert the website""" 
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
 #     print(url)
     request = urllib.request.urlopen( url )
+    
     content = request.read().decode()
 #     print(content)
 
