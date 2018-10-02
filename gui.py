@@ -19,6 +19,7 @@ import PIL.ImageTk
 
 # OpenWeatherMap Data collection
 def get_open_weather_data(city='London,uk'):
+   """ Get json weather data and put it into a dictionary and update the gui based on the dictionary values """
       
     city = city.replace(' ', '%20')
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city, OWM_API_KEY_)
@@ -93,6 +94,7 @@ def get_open_weather_data(city='London,uk'):
     sunset.set(sunset_dt)
 
     print(weather_icon)
+  # Get the weather icon for the city we are targeting
     url_icon = "http://openweathermap.org/img/w/{}.png".format(weather_icon)
     ico = urlopen(url_icon)
     open_im = PIL.Image.open(ico)
@@ -102,6 +104,7 @@ def get_open_weather_data(city='London,uk'):
 
 
 def _get_station_open():
+  """ Get the city from the combobox and use it in the get_open_weather_data function """
     city = open_city_combo.get()
     get_open_weather_data(city)
 
