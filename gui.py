@@ -67,7 +67,7 @@ def get_open_weather_data(city='London,uk'):
         visibility_miles = 'N/A'
     else:
         visibility_miles = meter_to_miles(visibility_meter)
-
+    
     def mps_to_mph(meter_second):
       """ Convert meters per second to miles per hour """
 
@@ -149,6 +149,7 @@ def _get_cities():
 
 
 def get_city_station_ids(state='ca'):
+  """ Parse the HTML code of a website to obtain city and station id for a given state, and add the city and state to the gui """
     url_general = 'http://w1.weather.gov/xml/current_obs/seek.php?state={}&Find=Find'
     state = state.lower()                       # has to be in lower case
     url = url_general.format(state)
