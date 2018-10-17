@@ -176,6 +176,7 @@ def get_city_station_ids(state='ca'):
 
 # callback function
 def _get_station():
+   """ Get station id from the combobox """
     station = station_id_combo.get()
     get_weather_data(station)
     populate_gui_from_dict()
@@ -188,6 +189,7 @@ def _quit():
     exit()
 
 class WeatherHTMLParser(HTMLParser):
+   """ Class that parses HTML for the weather app """
     def __init__(self):
         super().__init__()
         self.stations = []
@@ -195,6 +197,7 @@ class WeatherHTMLParser(HTMLParser):
         self.grab_data = False
 
     def handle_starttag(self, tag, attrs):
+      """ Removes the unnecessary attributes in the start tag """
         for attr in attrs:
             if "display.php?stid=" in str(attr):
                 cleaned_attr= str(attr).replace("('href', 'display.php?stid=", '').replace("')", '')
@@ -202,6 +205,7 @@ class WeatherHTMLParser(HTMLParser):
                 self.grab_data = True
 
     def handle_data(self, data):
+      """ Append the html weather data into the line """
         if self.grab_data:
             self.cities.append(data)
             self.grab_data = False
