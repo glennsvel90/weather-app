@@ -1,1 +1,1 @@
-OWM_API_KEY_ =  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+OWM_API_KEY_ =  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'

@@ -18,9 +18,11 @@ import PIL.ImageTk
 #======================
 
 # OpenWeatherMap Data collection
+
+
 def get_open_weather_data(city='London,uk'):
    """ Get json weather data and put it into a dictionary and update the gui based on the dictionary values """
-      
+
     city = city.replace(' ', '%20')
     url = "http://api.openweathermap.org/data/2.5/weather?q={}&appid={}".format(city, OWM_API_KEY_)
     response = urlopen(url)
@@ -68,7 +70,7 @@ def get_open_weather_data(city='London,uk'):
         visibility_miles = 'N/A'
     else:
         visibility_miles = meter_to_miles(visibility_meter)
-    
+
     def mps_to_mph(meter_second):
       """ Convert meters per second to miles per hour """
 
@@ -110,12 +112,12 @@ def _get_station_open():
 
 
 def get_weather_data(station_id='KLAX'):
-     """ Retrieve live data from the website and insert the website into a dictionary using weather station id""" 
+     """ Retrieve live data from the website and insert the website into a dictionary using weather station id"""
     url_general = 'http://www.weather.gov/xml/current_obs/{}.xml'
     url = url_general.format(station_id)
 #     print(url)
     request = urllib.request.urlopen( url )
-    
+
     content = request.read().decode()
 #     print(content)
 
@@ -132,7 +134,7 @@ def get_weather_data(station_id='KLAX'):
 
 def populate_gui_from_dict():
     """ Add weather dictionary values to the gui """
-    
+
     location.set(weather_data_tags_dict['location'])
     updated.set(weather_data_tags_dict['observation_time'].replace('Last Updated on ', ''))
     weather.set(weather_data_tags_dict['weather'])
