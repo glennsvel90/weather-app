@@ -1,5 +1,3 @@
-import tkinter as tk
-from tkinter import Menu
 from tkinter import ttk
 from tkinter import scrolledtext
 from API_key import OWM_API_KEY_
