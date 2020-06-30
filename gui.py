@@ -93,14 +93,7 @@ def get_open_weather_data(city='London,uk'):
     sunset_dt = unix_to_datetime(sunset_unix)
     sunset.set(sunset_dt)
 
-    print(weather_icon)
-  # Get the weather icon for the city we are targeting
-    url_icon = "http://openweathermap.org/img/w/{}.png".format(weather_icon)
-    ico = urlopen(url_icon)
-    open_im = PIL.Image.open(ico)
-    open_photo = PIL.ImageTk.PhotoImage(open_im)
-    ttk.Label(open_weather_cities_frame, image=open_photo).grid(column=0, row=1)
-    win.update()        # required or we won't see the icon
+
 
 
 def _get_station_open():
