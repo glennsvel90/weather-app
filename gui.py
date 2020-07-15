@@ -481,19 +481,4 @@ state_combo.current(0)                 # highlight first
 
 get_weather_btn = ttk.Button(weather_states_frame,text='Get Cities', command=_get_cities).grid(column=2, row=0)
 
-scr = scrolledtext.ScrolledText(weather_states_frame, width=30, height=17, wrap=tk.WORD)
-scr.grid(column=0, row=1, columnspan=3)
 
-# ---------------------------------------------------------------
-for child in weather_states_frame.winfo_children():
-        child.grid_configure(padx=6, pady=6)
-
-
-# ---------------------------------------------------------------
-
-#======================
-# Start GUI
-#======================
-# get_weather_data()
-# populate_gui_from_dict()
-win.mainloop()
