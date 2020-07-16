@@ -30,9 +30,6 @@ def get_open_weather_data(city='London,uk'):
 
     pprint(json_data)
 
-    lat_long = json_data['coord']
-    lastupdate_unix = json_data['dt']
-    city_id = json_data['id']
     humidity = json_data['main']['humidity']
     pressure = json_data['main']['pressure']
     temp_kelvin = json_data['main']['temp']
